@@ -5,7 +5,7 @@ public class Deck {
     private List<Card> cards;
 
     public Deck() {
-        this.cards = new ArrayList<>();
+        cards = new ArrayList<>();
     }
 
     public Deck(List<Card> cards) {
@@ -118,13 +118,13 @@ public class Deck {
     }
 
     public Card drawCard() {
-        if (this.cards.isEmpty()) {
+        if (cards.isEmpty()) {
             throw new NullPointerException("There are no more cards in the deck.");
         } else return this.cards.remove(cards.size()-1);
     }
 
     public int size() {
-        return this.cards.size();
+        return cards.size();
     }
 
     @Override
