@@ -25,15 +25,15 @@ public class DeckTest {
     @Test
     public void shouldShuffleTheDeck() {
         testDeck.shuffle();
-        assertFalse(sampleDeck.getCards().equals(testDeck.getCards()));
-        assertTrue(sampleDeck.size() == testDeck.size());
+        assertNotEquals(sampleDeck.getCards(), testDeck.getCards());
+        assertEquals(sampleDeck.size(), testDeck.size());
     }
 
     @Test
     public void shouldSortTheDeck() {
         shuffledDeck.sort();
         assertEquals(sampleDeck.getCards(), shuffledDeck.getCards());
-        assertTrue(sampleDeck.size() == shuffledDeck.size());
+        assertEquals(sampleDeck.size(), shuffledDeck.size());
     }
 
     @Test

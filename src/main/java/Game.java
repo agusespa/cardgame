@@ -32,11 +32,8 @@ public class Game {
         while (deckList.size() > 0) {
             Deck currentDeck = deckList.get(deckList.size()-1);
 
-            System.out.println("Choose an action");
-            System.out.println("Enter 1 to draw a card");
-            System.out.println("Enter 2 to shuffle the deck");
-            System.out.println("Enter 3 to sort the deck");
-            System.out.println("Enter 4 to exit the game");
+            System.out.println("Choose an action: ");
+            System.out.println("[1] to draw a card | [2] to shuffle the deck | [3] to sort the deck | [4] to exit the game");
 
             int selection = 0;
             while (selection < 1 || selection > 4) {
@@ -53,7 +50,7 @@ public class Game {
                 try {
                     System.out.println("You got " + currentDeck.drawCard());
                 } catch (Exception e) {
-                    deckList.remove(deckList.size()-1);
+                    deckList.remove(deckList.size() - 1);
                     System.out.println("You have " + deckList.size() + " deck(s) left.");
                 }
             }
