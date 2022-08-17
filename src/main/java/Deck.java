@@ -40,10 +40,11 @@ public class Deck {
                 clubs.add(card);
         }
 
-        quicksort(spades);
-        quicksort(hearths);
-        quicksort(diamonds);
-        quicksort(clubs);
+        quickSort(spades);
+        quickSort(hearths);
+        quickSort(diamonds);
+        quickSort(clubs);
+
         clubs.addAll(diamonds);
         clubs.addAll(hearths);
         clubs.addAll(spades);
@@ -51,37 +52,44 @@ public class Deck {
         setCards(clubs);
     }
 
-    void quicksort(List<Card> list) {
-        quicksort(list, 0, list.size() -1);
+    void quickSort(List<Card> list) {
+        quickSort(list, 0, list.size() -1);
     }
-    void quicksort(List<Card> list, int lowIndex, int highIndex) {
-        if (lowIndex < highIndex) {
-            int partitionIndex = partition(list, lowIndex, highIndex);
+    void quickSort(List<Card> list, int left, int right) {
+            // swap elements according to rank and return a pivot to divide the list
+            int partitionIndex = partition(list, left, right);
 
-            quicksort(list, lowIndex, partitionIndex-1);
-            quicksort(list, partitionIndex+1, highIndex);
-        }
+            // recursively call the partition method on the two halves of the list
+            if (left < partitionIndex - 1) {
+                quickSort(list, left, partitionIndex - 1);
+            }
+            if (partitionIndex < right) {
+                quickSort(list, partitionIndex, right);
+            }
     }
 
-    int partition(List<Card> list, int low, int high) {
-        Card pivot = list.get(high);
-        int lowIndex = (low - 1);
+    int partition(List<Card> list, int left, int right) {
+        Card pivot = list.get((left + right) / 2);
 
-        for (int j = low; j < high; j++) {
-            if (list.get(j).getRank() <= pivot.getRank()) {
-                lowIndex++;
-                Card temp = list.get(lowIndex);
-                Card cardAtJ = list.get(j);
-                list.set(lowIndex, cardAtJ);
-                list.set(j, temp);
+        while (left <= right) {
+
+            // find elements that are in the wrong side
+            while (list.get(left).getRank() < pivot.getRank())
+                left++;
+            while (list.get(right).getRank() > pivot.getRank())
+                right--;
+
+            // swap the elements to their correct side
+            if (left <= right) {
+                Card leftCard = list.get(left);
+                Card rightCard = list.get(right);
+                list.set(left, rightCard);
+                list.set(right, leftCard);
+                left++;
+                right--;
             }
         }
-
-        Card temp = list.get(lowIndex + 1);
-        list.set(lowIndex + 1, list.get(high));
-        list.set(high, temp);
-
-        return lowIndex + 1;
+        return left;
     }
 
     // This built-in method is more appropriate for production.
